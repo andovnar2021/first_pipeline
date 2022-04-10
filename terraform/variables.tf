@@ -16,7 +16,7 @@ default     = "vpc-0f194f3d56cd58736"
 
 }
 
-variable "My_VPC2" {
+variable "My_VPC3" {
   
 default     = "vpc-0f194f3d56cd58736"
 
