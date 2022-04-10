@@ -15,3 +15,9 @@ variable "My_VPC" {
 default     = "vpc-0f194f3d56cd58736"
 
 }
+
+variable "My_VPC2" {
+  
+default     = "vpc-0f194f3d56cd58736"
+
+}
