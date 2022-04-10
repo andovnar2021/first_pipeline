@@ -19,34 +19,34 @@ jobs:
     env:
       WORKING_DIRECTORY: terraform
   
-  steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
 
-    - name: Configure AWS Credentials
-      uses:   
-      with:
-        aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
-        aws-secret-access-key: ${{env.AWS_SECRET_KEY}}
-        aws-region: "eu-central-1"
+      - name: Configure AWS Credentials
+        uses:   
+        with:
+          aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{env.AWS_SECRET_KEY}}
+          aws-region: "eu-central-1"
 
-    - name: 'Use terraform 1.1.7'
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.1.7
+      - name: 'Use terraform 1.1.7'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
 
-    - name: 'Terraform fmt'
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: true
-      working-directory: ${{ env.WORKING_DIRECTORY }}    
+      - name: 'Terraform fmt'
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
 
-    - name: 'Terraform init'
-      id: init
-      run: terraform init 
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: 'Terraform init'
+        id: init
+        run: terraform init 
+        working-directory: ${{ env.WORKING_DIRECTORY }}
 
-    - name: 'Terraform plan'
-      id: plan
-      run: terraform plan -no-color
-      working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: 'Terraform plan'
+        id: plan
+        run: terraform plan -no-color
+        working-directory: ${{ env.WORKING_DIRECTORY }}
