@@ -1,4 +1,4 @@
-name: 'TF plan DEV'
+name: 'terraform-first-pipeline'
 
 on:
   pull_request:
@@ -28,7 +28,7 @@ jobs:
       with:
         aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
         aws-secret-access-key: ${{env.AWS_SECRET_KEY}}
-        aws-region: "us-east-1"
+        aws-region: "eu-central-1"
 
     - name: 'Use terraform 1.1.7'
       uses: hashicorp/setup-terraform@v1
