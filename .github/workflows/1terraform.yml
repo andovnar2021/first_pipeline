@@ -95,6 +95,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
   CD:
     name: deploy terraform
+    needs: [CI]
     runs-on: ubuntu-latest
     env:
       WORKING_DIRECTORY: terraform
@@ -114,6 +115,11 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.1.7
+          
+      - name: 'Terraform init'
+        id: init
+        run: terraform init 
+        working-directory: ${{ env.WORKING_DIRECTORY }}
           
       - name: 'Terraform apply'
         id: apply
