@@ -14,7 +14,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "test-state-dos07"
+    bucket = "hhh-back-state"
     key    = "state/terraform.tfstate"
     region = "us-east-1"
   }
