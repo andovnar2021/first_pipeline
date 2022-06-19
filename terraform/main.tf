@@ -17,6 +17,21 @@ terraform {
     bucket = "hhh-back-state"
     key    = "state/terraform.tfstate"
     region = "eu-central-1"
+    kms_key_id     = "alias/terraform-bucket-key"
+    dynamodb_table = "${terraform.workspace}-state-lock-dynamo"
+  }
+}
+
+resource "aws_dynamodb_table" "${terraform.workspace}-state-lock-dynamo" {
+  name = "${terraform.workspace}-state-lock-dynamo"
+  hash_key = "LockID"
+  read_capacity = 20
+  write_capacity = 20
+
+ 
+  attribute {
+    name = "LockID"
+    type = "S"
   }
 }
 
