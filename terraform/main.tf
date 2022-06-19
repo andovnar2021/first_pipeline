@@ -12,6 +12,14 @@ provider "aws" {
 
 }
 
+terraform {
+  backend "s3" {
+    bucket = "test-state-dos07"
+    key    = "state/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 resource "aws_instance" "web" {
   ami           = var.MY_AMI
   instance_type = var.instance_type
