@@ -15,15 +15,15 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "hhh-back-state"
-    key    = "state/terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "eu-central-1"
-    kms_key_id     = "alias/terraform-bucket-key"
-    dynamodb_table = "${terraform.workspace}-state-lock-dynamo"
+    #kms_key_id     = "alias/terraform-bucket-key"
+    dynamodb_table = "dos07-state-lock-dynamo"
   }
 }
 
-resource "aws_dynamodb_table" "${terraform.workspace}-state-lock-dynamo" {
-  name = "${terraform.workspace}-state-lock-dynamo"
+resource "aws_dynamodb_table" "dos07-state-lock-dynamo" {
+  name = "dos07-state-lock-dynamo"
   hash_key = "LockID"
   read_capacity = 20
   write_capacity = 20
