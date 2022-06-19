@@ -22,7 +22,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_security_group" "dos07_terraform_sg" {
-  name        = "PipeLine"
+  name        = "PipeLine123"
   description = "TerraformSGroup for dos07"
   vpc_id      = var.My_VPC
 
