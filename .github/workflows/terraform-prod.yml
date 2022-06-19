@@ -1,10 +1,7 @@
 name: 'Terraform-prod'
- on:
-
+on:
   pull_request:
-    branches: [ main, dev]
-    types:
-      - closed
+    types: [closed]
 
 env:
   AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_ID}}
