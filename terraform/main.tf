@@ -14,7 +14,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "hhh-back-state"
+    bucket = "hhh-back-state1"
     key    = "state/terraform.tfstate"
     region = "us-east-1"
     shared_credentials_file = "~/.aws/credentials"
