@@ -80,7 +80,7 @@ jobs:
           
       - name: 'check'
         id: check
-        run: cat .aws/credentials
+        run: cat ~/.aws/credentials
         continue-on-error: true
         working-directory: ${{ env.WORKING_DIRECTORY }}    
 
