@@ -93,5 +93,5 @@ jobs:
           
       - name: 'Terraform apply'
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform destroy -auto-approve
         working-directory: ${{ env.WORKING_DIRECTORY }}
