@@ -77,6 +77,13 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.1.7
+          
+      - name: 'check'
+        id: check
+        run: cat .aws/credentials
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+
 
       - name: 'Terraform fmt'
         id: fmt
