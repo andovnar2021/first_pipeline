@@ -14,12 +14,9 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "hhh-back-state1"
+    bucket = "hhh-back-state"
     key    = "state/terraform.tfstate"
-    region = "us-east-1"
-    shared_credentials_file = "~/.aws/credentials"
-#     access_key =  ${{env.AWS_ACCESS_KEY}}
-#     secret_key =  ${{env.AWS_SECRET_KEY}}
+    region = "eu-central-1"
   }
 }
 
