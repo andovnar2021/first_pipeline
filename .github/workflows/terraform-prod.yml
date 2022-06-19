@@ -1,0 +1,101 @@
+name: 'Terraform-prod'
+ on:
+
+  pull_request:
+    branches: [ main, dev]
+    types:
+      - closed
+
+env:
+  AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY_ID}}   
+
+
+jobs:
+  CI:
+    name: running terraform plan
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: terraform
+  
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{env.AWS_SECRET_KEY}}
+          aws-region: "eu-central-1"
+
+      - name: 'Use terraform 1.1.7'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
+          
+      
+
+
+      - name: 'Terraform fmt'
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+
+      - name: 'Terraform init'
+        id: init
+        run: terraform init
+        #run: terraform init -reconfigure 
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        
+      - name: 'Terraform workspace'
+        id: workspace
+        run: | 
+          terraform workspace new prod
+          terraform workspace new dev
+         
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+        
+      - name: 'Select workspace'
+        id: selectworkspace
+        run: terraform workspace select prod
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+
+      - name: 'Terraform plan'
+        id: plan
+        run: terraform plan -no-color
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        
+        
+      - name: 'Terraform apply'
+        id: apply
+        run: terraform destroy -var-file prod.tfvars -auto-approve
+        working-directory: ${{ env.WORKING_DIRECTORY }} 
+        
+      - name: Post to a Slack channel
+        if: always()
+        id: slack
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+    # Slack channel id, channel name, or user id to post message.
+    # See also: https://api.slack.com/methods/chat.postMessage#channels
+         channel-id: 'C03CXRCS2A1'
+    # For posting a rich message using Block Kit
+         payload: |
+           {
+             "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+             "blocks": [
+               {
+                 "type": "section",
+                 "text": {
+                   "type": "mrkdwn",
+                   "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                 }
+               }
+             ]
+           }
+        env:
+         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}    
