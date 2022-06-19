@@ -67,7 +67,7 @@ jobs:
 
       - name: 'Terraform plan'
         id: plan
-        run: terraform plan -no-color
+        run: terraform plan -var-file dev.tfvars -no-color
         working-directory: ${{ env.WORKING_DIRECTORY }}
         
         
