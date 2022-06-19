@@ -55,7 +55,13 @@ jobs:
         run: | 
           terraform workspace new prod
           terraform workspace new dev
-          terraform workspace select dev
+         
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+        
+      - name: 'Select workspace'
+        id: selectworkspace
+        run: terraform workspace select dev
         continue-on-error: true
         working-directory: ${{ env.WORKING_DIRECTORY }}    
 
@@ -67,7 +73,7 @@ jobs:
         
       - name: 'Terraform apply'
         id: apply
-        run: terraform destroy -var-file dev.tfvars -auto-approve
+        run: terraform apply -var-file dev.tfvars -auto-approve
         working-directory: ${{ env.WORKING_DIRECTORY }} 
         
         
