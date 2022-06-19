@@ -17,6 +17,7 @@ terraform {
     bucket = "hhh-back-state"
     key    = "state/terraform.tfstate"
     region = "us-east-1"
+    shared_credentials_file = "$HOME/.aws/credentials"
 #     access_key =  ${{env.AWS_ACCESS_KEY}}
 #     secret_key =  ${{env.AWS_SECRET_KEY}}
   }
