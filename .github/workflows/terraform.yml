@@ -79,10 +79,9 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.16.0
         with:
-    # Slack channel id, channel name, or user id to post message.
-    # See also: https://api.slack.com/methods/chat.postMessage#channels
+
          channel-id: 'C03CXRCS2A1'
-    # For posting a rich message using Block Kit
+
          payload: |
            {
              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
@@ -100,45 +99,4 @@ jobs:
          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}    
         
         
-        
-#   CD:
-#     name: deploy terraform
-#     needs: [CI]
-#     runs-on: ubuntu-latest
-#     env:
-#       WORKING_DIRECTORY: terraform
-  
-#     steps:
-#       - name: 'Checkout'
-#         uses: actions/checkout@v3
 
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
-#           aws-secret-access-key: ${{env.AWS_SECRET_KEY}}
-#           aws-region: "eu-central-1"
-
-#       - name: 'Use terraform 1.1.7'
-#         uses: hashicorp/setup-terraform@v1
-#         with:
-#           terraform_version: 1.1.7
-          
-#       - name: 'Terraform init'
-#         id: init
-#         run: terraform init 
-#         working-directory: ${{ env.WORKING_DIRECTORY }}
-        
-#       - name: 'Terraform workspace'
-#         id: workspace
-#         run: | 
-#           terraform workspace new prod
-#           terraform workspace new dev
-#           terraform workspace select dev
-#         continue-on-error: true
-#         working-directory: ${{ env.WORKING_DIRECTORY }}    
-          
-#       - name: 'Terraform apply'
-#         id: apply
-#         run: terraform destroy -auto-approve
-#         working-directory: ${{ env.WORKING_DIRECTORY }}
