@@ -1,1 +1,2 @@
-MY_AMI = "ami-0d527b8c289b4af7f"
+path_to_file   = "container-definitions/container-def.json"
+container_name = "my-flask-app"
