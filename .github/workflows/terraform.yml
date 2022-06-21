@@ -44,10 +44,9 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}    
         
       - name: 'tfsec'
-        id: tfsec
-        run: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
         continue-on-error: true
-        working-directory: ${{ env.WORKING_DIRECTORY }}    
+        
 
       - name: 'Terraform init'
         id: init
