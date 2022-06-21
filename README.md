@@ -14,7 +14,9 @@ Infrastructure for flask application. PROD and DEV environment have the same str
 - fmt and tfsec checks are performed
 - rises DEV environment
 - send notification message to slack
+- 
 2. Check DEV environment.
+
 3.PIPELINE on merge to main->
 - fmt and tfsec checks are performed
 - rising PROD environment
