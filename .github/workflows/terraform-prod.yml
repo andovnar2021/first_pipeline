@@ -32,19 +32,21 @@ jobs:
           terraform_version: 1.1.7
           
       
-
-
-      - name: 'Terraform fmt'
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
-        working-directory: ${{ env.WORKING_DIRECTORY }}    
-
       - name: 'Terraform init'
         id: init
         run: terraform init
         #run: terraform init -reconfigure 
         working-directory: ${{ env.WORKING_DIRECTORY }}
+        
+      - name: 'Terraform fmt'
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: ${{ env.WORKING_DIRECTORY }}    
+        
+      - name: 'tfsec'
+        uses: aquasecurity/tfsec-action@v1.0.0
+        continue-on-error: true
         
       - name: 'Terraform workspace'
         id: workspace
