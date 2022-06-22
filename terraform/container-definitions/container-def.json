@@ -1,7 +1,7 @@
 [
     {
       "name": "my-flask-app",
-      "image": "nginx:latest",
+      "image": "11051988/myflaskapp:latest",
       "cpu": 256,
       "memory": 256,
       "essential": true,
