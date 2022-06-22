@@ -11,13 +11,13 @@ https://github.com/andovnar2021/dna-project.git
 
 Infrastructure for flask application. PROD and DEV environment have the same structure. They can only be distinguished by the parameters specified in the corresponding files.
 <br>
-1. PIPELINE when creating pull request to main ->
+1.PIPELINE when creating pull request to main ->
 
 - fmt and tfsec checks are performed
 - rises DEV environment
 - send notification message to slack
 
-3. Check DEV environment.
+2.Check DEV environment.
 
 3.PIPELINE on merge to main->
 - fmt and tfsec checks are performed
