@@ -24,11 +24,11 @@ resource "aws_ecs_task_definition" "task-definition" {
 }
 
 resource "aws_ecs_service" "service" {
-  name                = "${local.ws_name}-${var.app_name}-service"
-  cluster             = aws_ecs_cluster.web-cluster.id
-  task_definition     = aws_ecs_task_definition.task-definition.arn
-  scheduling_strategy = "REPLICA"
-  desired_count       = 2
+  name                               = "${local.ws_name}-${var.app_name}-service"
+  cluster                            = aws_ecs_cluster.web-cluster.id
+  task_definition                    = aws_ecs_task_definition.task-definition.arn
+  scheduling_strategy                = "REPLICA"
+  desired_count                      = 2
   deployment_minimum_healthy_percent = 50
   load_balancer {
     target_group_arn = aws_lb_target_group.lb_target_group.arn
