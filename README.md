@@ -23,7 +23,6 @@ Infrastructure for flask application. PROD and DEV environment have the same str
 - fmt and tfsec checks are performed
 - rising PROD environment
 - send notification message to slack
-- 
 
 ![image1](/Shema.jpg)
 
