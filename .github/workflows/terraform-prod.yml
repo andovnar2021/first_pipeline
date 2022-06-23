@@ -41,7 +41,7 @@ jobs:
       - name: 'Terraform fmt'
         id: fmt
         run: terraform fmt -check
-        continue-on-error: true
+       # continue-on-error: true
         working-directory: ${{ env.WORKING_DIRECTORY }}    
         
       - name: 'tfsec'
@@ -71,7 +71,7 @@ jobs:
         
       - name: 'Terraform apply'
         id: apply
-        run: terraform apply -var-file prod.tfvars -auto-approve
+        run: terraform destoy -var-file prod.tfvars -auto-approve
         working-directory: ${{ env.WORKING_DIRECTORY }} 
         
       - name: Post to a Slack channel
