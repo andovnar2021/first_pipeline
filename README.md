@@ -27,4 +27,4 @@ Infrastructure for flask application. PROD and DEV environment have the same str
 
 ![image1](/Shema.jpg)
 -
-
+-
