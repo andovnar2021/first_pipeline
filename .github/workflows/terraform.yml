@@ -76,8 +76,8 @@ jobs:
         
       - name: 'Terraform apply'
         id: apply
-        # run: terraform destroy -var-file dev.tfvars -auto-approve
-        run: terraform apply -var-file dev.tfvars -auto-approve
+        run: terraform destroy -var-file dev.tfvars -auto-approve
+        #run: terraform apply -var-file dev.tfvars -auto-approve
         working-directory: ${{ env.WORKING_DIRECTORY }} 
         
       - name: Post to a Slack channel
